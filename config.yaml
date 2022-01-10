@@ -13,7 +13,7 @@ outputs:
     - RSS
     - Algolia
 params:
-  SEOTitle: Colin Renville
+  SEOTitle:
   about_me: yes
   addtional_menus:
     - href: /top/books/
