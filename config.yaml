@@ -13,7 +13,7 @@ outputs:
     - RSS
     - Algolia
 params:
-  SEOTitle: 赵化冰的博客 | Zhaohuabing Blog
+  SEOTitle: Colin Renville
   about_me: yes
   addtional_menus:
     - href: /top/books/
@@ -59,8 +59,7 @@ params:
   friends: no
   header_image: img/home-bg-jeep.jpg
   image_404: img/404-bg.jpg
-  keyword: 赵化冰, zhaohuabing, Zhaohuabing, , 赵化冰的网络日志, 赵化冰的博客, Zhaohuabing Blog, 博客,
-    个人网站, 互联网, Web, 云原生, PaaS, Istio, Kubernetes, 微服务, Microservice
+  keyword: 
   leancloud_app_id: ''
   leancloud_app_key: ''
   omit_categories: no
@@ -68,7 +67,7 @@ params:
   reward: yes
   sidebar_about_description: Data Analyst
   sidebar_avatar: img/me.jpeg
-  slogan: 路在脚下，心向远方
+  slogan: 
   social:
     email: renville.colin@gmail.com
     github: https://github.com/renville-colin
