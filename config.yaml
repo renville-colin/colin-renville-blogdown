@@ -1,5 +1,5 @@
-baseurl: https://zhaohuabing.com
-title: Huabing Blog
+baseurl: https://colinrenville.com
+title: Colin Renville
 theme: hugo-theme-cleanwhite
 languageCode: en-us
 disqusShortname: ''
@@ -48,15 +48,15 @@ params:
     - href: https://unsplash.com
       title: unsplash
   bookmarks: no
-  description: 赵化冰，程序员, 开源爱好者，生活探险家 | 这里是 赵化冰 的博客，与你一起发现更大的世界。
+  description: TEST DESCRIPTION TEST TEST
   disqus_proxy: ''
   disqus_site: ''
   featured_condition_size: 1
-  featured_tags: yes
+  featured_tags: no
   friend_link:
     - href: https://zhaozhihan.com
       title: Linda的博客
-  friends: yes
+  friends: no
   header_image: img/home-bg-jeep.jpg
   image_404: img/404-bg.jpg
   keyword: 赵化冰, zhaohuabing, Zhaohuabing, , 赵化冰的网络日志, 赵化冰的博客, Zhaohuabing Blog, 博客,
@@ -66,17 +66,14 @@ params:
   omit_categories: no
   page_view_conter: no
   reward: yes
-  sidebar_about_description: Software Developer, Open Source Enthusiast and Life Adventurer
-  sidebar_avatar: img/zhaohuabing.png
+  sidebar_about_description: Data Analyst
+  sidebar_avatar: img/me.jpeg
   slogan: 路在脚下，心向远方
   social:
-    email: youremail@gmail.com
-    github: https://github.com/yourgithub
-    linkedin: https://www.linkedin.com/in/yourlinkedinid
-    rss: yes
-    stackoverflow: https://stackoverflow.com/users/yourstackoverflowid
-    wechat: your wechat qr code image
-  title_404: 你来到了没有知识的荒原 :(
+    email: renville.colin@gmail.com
+    github: https://github.com/renville-colin
+    linkedin: https://www.linkedin.com/in/colin-renville-388060150/
+  title_404: 
   twikoo_env_id: ''
 outputFormats:
   Algolia:
