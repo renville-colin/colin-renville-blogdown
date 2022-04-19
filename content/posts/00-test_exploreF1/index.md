@@ -1,7 +1,7 @@
 ---
-
-date: "2022-04-18"
+title: 'Analyzing Track Evolution during the 2021 Formula One Season'
 author: Colin Renville
+date: '2022-04-19'
 draft: false
 excerpt: 'How to acquire, prepare, and analyze Formula One lap data in R'
 layout: single
@@ -13,8 +13,9 @@ tags:
 - hugo
 - rstudio
 - github
-title: 'Analyzing Track Evolution during the 2021 Formula One Season'
-weight: 1
+show_author_byline: true
+show_post_date: true
+show_post_thumbnail: true
 ---
 
 # Analysis Focus
@@ -541,7 +542,6 @@ In order to lay the groundwork for my idea on predicting a Fast Lap vs. a Slow l
 
 
 ```r
-
 ad_VER_focus_laps <- ad_quali_2021_l %>%
   select(Driver, DriverNumber, LapNumber, PitInTime, PitOutTime,
          Sector1SessionTime, Sector2SessionTime, Sector3SessionTime,
@@ -553,10 +553,7 @@ ad_VER_focus_laps <- ad_quali_2021_l %>%
 
 
 ad_VER_focus_laps %>%
-  as.data.frame() %>%
-  kbl() %>%
-  kable_styling(position = "center") # will need to trial and error this one once uploaded to blog
-
+  as.data.frame()
 ```
 
 ```
@@ -905,12 +902,8 @@ For this analysis, we will deal with this case by analyzing the laps of only dri
 # grabbing the drivers who advanced to Q3 during qualifyinh
 
 ad_compile_q3_drivers <- ad_quali_2021_l %>%
-  # filter(raceName == "Abu Dhabi Grand Prix") %>%
-  # select(raceName, Driver, session_number_coal2) %>%
   select(raceName, Driver, session_number_coal) %>%
   group_by(raceName, Driver) %>%
-  # summarize(max_session = max(as.numeric(as.character(session_number_coal2))),
-  #           .groups = "drop") %>%
   summarize(max_session = max(as.numeric(as.character(session_number_coal))),
             .groups = "drop") %>%
   filter(max_session == 3)
@@ -919,7 +912,6 @@ ad_compile_q3_drivers <- ad_quali_2021_l %>%
 
 
 ```r
-
 # filtering on drivers who made Q3 via inner join
 # then. filtering explicitly on only fast laps (hclust == 1)
 
@@ -927,7 +919,6 @@ ad_quali_2021_l_fast_compile <- ad_quali_2021_l %>%
   inner_join(ad_compile_q3_drivers, by = c("Driver" = "Driver",
                                            "raceName" = "raceName")) %>%
   filter(hclust == 1)
-
 ```
 
 
@@ -968,24 +959,20 @@ In the plot above, we can see a trend downwards in lap times for the drivers tha
 
 ## Analysis
   
-Now it's time to build a statistical model. For a descriptive analysis like this - where we're not necessarily interested in predicting outcomes, but rather to describe and measure the patterns, trends, and behaviors that the data contains - there are a variety of models we can use to do so. Ideally we are looking for a model that's simple enough to interpret and explain, but possesses the ability to capture any non-linear trends that come up in our small data.
+Now it's time to build a statistical model. For a descriptive analysis like this - where we're not necessarily interested in predicting outcomes, but rather in describing and measuring the patterns, trends, and behaviors that the data contains. There are a variety of models we can use to do accomplish this. Ideally we are looking for a model that's simple enough to interpret and explain, but possesses the ability to capture any non-linear or more-complicated trends that come up in our small data.
 
-Generalized Additive Models (GAM) are a great candidate to solve for these needs as they have more flexibility (no pun intended) in comparison to linear models - thanks to their usage of basis functions, but are also relatively-interpretable compared to fancier black box machine learning algorithms.
+Generalized Additive Models (GAM) are a great candidate to solve for these needs as they have more flexibility (no pun intended) in comparison to linear models - thanks to their usage of basis functions, but are also relatively-interpretable compared to fancier black box machine learning algorithms The **mgcv** package is a great tool for fitting GAMs, and below is code that instantiates a GAM model object. 
 
 
 ```r
-
 ad_q3_driver_gam <- mgcv::gam(LapTime5 ~ s(lap_start_rownum, by = Compound) + Compound + Team,
                               data = ad_quali_2021_l_fast_compile, method = "REML")
-
-
 ```
 
 
 #### Modeling over observed data
 
 ```r
-
 # modeling over observed data
 
 ad_q3_driver_preds <- broom::augment(ad_q3_driver_gam, data = ad_quali_2021_l_fast_compile) %>% 
@@ -993,7 +980,6 @@ ad_q3_driver_preds <- broom::augment(ad_q3_driver_gam, data = ad_quali_2021_l_fa
          session_number_coal, LapTime5, .fitted, .se.fit, .resid) %>%# View()
   mutate(lower = .fitted - 1.96 * .se.fit,
          upper = .fitted + 1.96 * .se.fit)
-
 ```
 
 Here we can see a 6 row preview of the "observed" data used for model training. Using the *augment* function from the broom package, the model is fit to the observed data. This function also creates a series of model fit columns attached to the end of the dataset: **.fitted, .se.fit, .resid, lower, upper**
@@ -1001,10 +987,7 @@ Here we can see a 6 row preview of the "observed" data used for model training. 
 ```r
 ad_q3_driver_preds %>%
   head() %>%
-  as.data.frame() %>%
-  kbl() %>%
-  kable_styling(position = "center")
-
+  as.data.frame() 
 ```
 
 ```
@@ -1022,7 +1005,6 @@ ad_q3_driver_preds %>%
 Below is a visualization of the fit of the GAM model for Abu Dhabi qualifying. The laps and any usage of model outputs for laps under medium tires will all but be thrown away, but it's still kind of interesting to see the difference in lap time for teams that use both the soft and medium compound tires. 
 
 ```r
-
 # plot: model over observed data
 
 ad_q3_driver_preds %>%
@@ -1045,8 +1027,6 @@ ad_q3_driver_preds %>%
                                 "MEDIUM" = "#e3a600")) +
   theme_main() +
   theme_main_add()
-
-
 ```
 
 ![](images/ad_21_q_laptimes_model.png)
@@ -1058,7 +1038,6 @@ The final step for modeling Abu Dhabi qualifying is to create a final dataframe 
 
 
 ```r
-
 ad_max_laps_team_data <- ad_quali_2021_l_fast_compile %>%
   select(season, raceName, Team, lap_start_rownum) %>%
   group_by(season, raceName, Team) %>%
@@ -1076,7 +1055,6 @@ fit_predict_df <- ad_max_laps_team_data %>%
   ungroup()
 
 fit_predict_df %>% head()
-
 ```
 
 ```

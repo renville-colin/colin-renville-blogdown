@@ -1,35 +1,37 @@
-Z---
-aliases:
-- Posts
-author: Colin Renville
+---
+title: Blog Posts
+description: | 
+  Anything and everything data.
+author: "Colin Renville"
+show_post_thumbnail: true
+thumbnail_left: true # for list-sidebar only
+show_author_byline: false
+show_post_date: true
+show_button_links: false
+# for listing page layout
+layout: list # list, list-sidebar, list-grid
+
+# for list-sidebar layout
+sidebar: 
+  title: Blog
+  description: |
+    
+  author: "Colin Renville"
+  text_link_label: Subscribe via RSS
+  text_link_url: /index.xml
+  show_sidebar_adunit: true # show ad container
+
+# set up common front matter for all pages inside blog/
 cascade:
-  author: Colin Renville
-  layout: single-series
+  author: "Colin Renville"
   show_author_byline: true
   show_post_date: true
+  show_comments: true # see site config to choose Disqus or Utterances
+  # for single-sidebar layout
   sidebar:
-    show_sidebar_adunit: false
-    text_contents_label: On this page
-    text_link_label: Visit the demo site
-    text_link_url: https://hugo-apero.netlify.app/
-    text_series_label: In this series
-  type: collection
-description: |
-  Start using Hugo Apéro with GitHub, Netlify, and the blogdown R package with RStudio.
-layout: list
-show_author_byline: true
-show_post_date: true
-show_post_thumbnail: true
-sidebar:
-  author: Colin Renvillle
-  description: |
-  show_sidebar_adunit: false
-  text_link_label: Visit the demo site
-  text_link_url: https://hugo-apero.netlify.app/
-  title: Get started
-thumbnail_left: false
-title: posts
-type: collection
+    text_link_label: View recent posts
+    text_link_url: /blog/
+    show_sidebar_adunit: false # show ad container
 ---
 
 ** No content below YAML for the series _index. This file is a leaf bundle, and provides settings for the listing page layout and sidebar content.**
