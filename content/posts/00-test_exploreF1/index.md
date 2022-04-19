@@ -1,6 +1,7 @@
 ---
 
 date: "2022-04-18"
+author: Colin Renville
 draft: false
 excerpt: 'How to acquire, prepare, and analyze Formula One lap data in R'
 layout: single
@@ -368,7 +369,7 @@ As a prelude for the rest of this data cleaning exercise, and for a spoiler for 
 
 There were numerous qualifying sessions throughout the season that did not hold our key assumption above, which will need additional more-stringent and case-specific data cleaning (Part 2!). 
 
-Things that worked for Abu Dhabi, but *could* not work for other qualifyings:
+Things that worked for Abu Dhabi, but *may* not work for other qualifyings:
 
   - Red flags in qualifying ( more-prevalent in recent seasons) lasting more than 5 minutes
   - There always being two laps in a session within 5 minutes of each other

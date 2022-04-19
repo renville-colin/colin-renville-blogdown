@@ -17,8 +17,8 @@ cascade:
 description: |
   Start using Hugo Apéro with GitHub, Netlify, and the blogdown R package with RStudio.
 layout: list
-show_author_byline: false
-show_post_date: false
+show_author_byline: true
+show_post_date: true
 show_post_thumbnail: true
 sidebar:
   author: Colin Renvillle
