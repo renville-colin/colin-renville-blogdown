@@ -821,7 +821,7 @@ ad_quali_2021_l <- ad_quali_2021_l %>%
   
 <br/>
 
-### 
+### Filtering to relevant analysis data
 
 So finally, we can create a plot that encompasses all of the work above, that:
 
