@@ -34,17 +34,14 @@ params:
   customheadingFontFamily: Fraunces
   customtextFontFamily: Commissioner
   description: A modern, beautiful, and easily configurable blog theme for Hugo.
-  favicon: /img/favicon.ico
+  favicon: /img/sig2.ico
   headingFontFamily: sans-serif
-  logo: /img/lemon.png
+  logo: /img/sig.png
   mainSections:
-    - blog
-    - project
-    - talk
   navallcaps: yes
   orgLocal: Anywhere
   orgName: RStudio
-  sharing_image: /img/papillons.jpg
+  sharing_image: /img/sig.jpg
   social:
     - icon: linkedin
       icon_pack: fab
@@ -55,7 +52,7 @@ params:
   socialInFooter: yes
   socialInHeader: no
   textFontFamily: sans-serif
-  theme: peach
+  theme: sky
   twitter: apreshill
   utterances:
     issue_term: pathname
@@ -82,30 +79,14 @@ menu:
       url: /contributors/
       weight: 3
   header:
-    - name: About
-      title: About Apéro
+    - name: About Me
+      title: About Me
       url: /about/
       weight: 1
-    - name: Get started
-      title: Get started using the Hugo Apéro theme
-      url: /get-started/
+    - name: Posts
+      title: Posts
+      url: /posts/
       weight: 2
-    - name: Learn
-      title: learn more about using the Hugo Apéro theme
-      url: /learn/
-      weight: 3
-    - name: Projects
-      title: Project Portfolio
-      url: /project/
-      weight: 4
-    - name: Talks
-      title: Talks
-      url: /talk/
-      weight: 5
-    - name: Elements
-      title: Element Page
-      url: /elements/
-      weight: 6
 privacy:
   disqus:
     disable: no

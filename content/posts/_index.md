@@ -1,6 +1,6 @@
----
+Z---
 aliases:
-- get-started
+- Posts
 author: Colin Renville
 cascade:
   author: Colin Renville
@@ -16,20 +16,19 @@ cascade:
   type: collection
 description: |
   Start using Hugo Apéro with GitHub, Netlify, and the blogdown R package with RStudio.
-layout: list-sidebar
+layout: list
 show_author_byline: false
 show_post_date: false
-show_post_thumbnail: false
+show_post_thumbnail: true
 sidebar:
-  author: Alison Hill
+  author: Colin Renvillle
   description: |
-    Start using Hugo Apéro with GitHub, Netlify, and the blogdown R package with RStudio.
   show_sidebar_adunit: false
   text_link_label: Visit the demo site
   text_link_url: https://hugo-apero.netlify.app/
   title: Get started
-thumbnail_left: true
-title: Get started
+thumbnail_left: false
+title: posts
 type: collection
 ---
 

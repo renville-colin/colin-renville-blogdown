@@ -13,7 +13,7 @@ tags:
 - rstudio
 - github
 title: 'Analyzing Track Evolution during the 2021 Formula One Season'
-weight: 7
+weight: 1
 ---
 
 # Analysis Focus

@@ -1,17 +1,19 @@
 ---
 ## Configure page content in wide column
-title: "Why apéro?" # leave blank to exclude
+title: "I'm Colin, nice to meet you." # leave blank to exclude
 number_featured: 1 # pulling from mainSections in config.toml
-number_categories: 3 # set to zero to exclude
+number_categories: 0 # set to zero to exclude
 use_featured: false
 show_intro: true
 intro: |
-  Apéro is a unique kind of casual get-together in French culture, when you gather with friends and get to know each other better over some apéritifs, snacks, and anything in between. A good apéro is one where you'd happily spend a few hours just hanging out.
+  I am an analyst with experience in the insurance, lottery, and video game industries. I have always loved using data as a tool for providing insights and I am lucky to have been able to follow a career path that lets me do that every day.
   
-  I hope this theme helps you create your own virtual apéro. A place where you and your site's visitors enjoy spending time, and one that helps folks get to know you better. 
-show_outro: true
+  I aspire to continue progressing down the path of a data scientist, with the goal that this blog will allow me to demonstrate skills that I learn through pet projects with the focus on applying statistical concepts to real-world data problems.
+  
+  Currently, I live in Austin, TX and I graduated from the University of Kansas in 2018 - Rock Chalk. In my free time, I really enjoy trying new coffees, watching Formula One - and most other sports - on the weekends, and just generally finding any impulsive adventure that I can go on.
+
+show_outro: false
 outro: |
-  <i class="fas fa-glass-cheers pr2"></i>Sincere thanks to [Maëlle Salmon](https://masalmon.eu/) for her help naming this Hugo theme!
 ---
 
 ** index doesn't contain a body, just front matter above.
