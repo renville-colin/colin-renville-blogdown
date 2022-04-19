@@ -1,88 +1,129 @@
-baseurl: https://colinrenville.com
+baseURL: https://colinrenville.com/
+languageCode: en
+theme: hugo-apero
 title: Colin Renville
-theme: hugo-theme-cleanwhite
-languageCode: en-us
-disqusShortname: ''
+author: Colin Renville
+copyright: ''
 googleAnalytics: ''
+disqusShortname: ''
+metaDataFormat: yaml
+footnoteReturnLinkContents: '&#8617;'
+paginate: 6
 preserveTaxonomyNames: yes
-paginate: 5
-hasCJKLanguage: yes
-outputs:
-  home:
-    - HTML
-    - RSS
-    - Algolia
-params:
-  SEOTitle:
-  about_me: yes
-  addtional_menus:
-    - href: /top/books/
-      title: BOOKS
-    - href: /top/archive/
-      title: ARCHIVE
-    - href: /top/about/
-      title: ABOUT
-  algolia:
-    params:
-      - categories
-      - tags
-    vars:
-      - title
-      - summary
-      - date
-      - publishdate
-      - expirydate
-      - permalink
-  algolia_apiKey: ''
-  algolia_appId: ''
-  algolia_indexName: ''
-  algolia_search: yes
-  ba_track_id: ''
-  bookmark_link:
-    - href: https://martinfowler.com
-      title: Martin Fowler
-    - href: http://www.servicemesher.com
-      title: ServiceMesher
-    - href: https://pxhere.com
-      title: Pxhere
-    - href: https://unsplash.com
-      title: unsplash
-  bookmarks: no
-  description: TEST DESCRIPTION TEST TEST
-  disqus_proxy: ''
-  disqus_site: ''
-  featured_condition_size: 1
-  featured_tags: no
-  friend_link:
-    - href: https://zhaozhihan.com
-      title: Linda的博客
-  friends: no
-  header_image: img/home-bg-jeep.jpg
-  image_404: img/404-bg.jpg
-  keyword: 
-  leancloud_app_id: ''
-  leancloud_app_key: ''
-  omit_categories: no
-  page_view_conter: no
-  reward: yes
-  sidebar_about_description: Data Analyst
-  sidebar_avatar: img/me.jpeg
-  slogan: 
-  social:
-    email: renville.colin@gmail.com
-    github: https://github.com/renville-colin
-    linkedin: https://www.linkedin.com/in/colin-renville-388060150/
-  title_404: 
-  twikoo_env_id: ''
-outputFormats:
-  Algolia:
-    baseName: algolia
-    isPlainText: yes
-    mediaType: application/json
-    notAlternative: yes
+ignoreFiles:
+  - \.Rmd$
+  - \.Rmarkdown$
+  - _cache$
+  - \.knit\.md$
+  - \.utf8\.md$
+enableEmoji: yes
 markup:
+  defaultMarkdownHandler: goldmark
+  goldmark:
+    renderer:
+      hardwraps: no
+      unsafe: yes
   highlight:
-    style: dracula
+    style: github
   tableOfContents:
     endLevel: 2
-    startLevel: 1
+    ordered: no
+    startLevel: 2
+params:
+  custom_theme: ''
+  customheadingFontFamily: Fraunces
+  customtextFontFamily: Commissioner
+  description: A modern, beautiful, and easily configurable blog theme for Hugo.
+  favicon: /img/favicon.ico
+  headingFontFamily: sans-serif
+  logo: /img/lemon.png
+  mainSections:
+    - blog
+    - project
+    - talk
+  navallcaps: yes
+  orgLocal: Anywhere
+  orgName: RStudio
+  sharing_image: /img/papillons.jpg
+  social:
+    - icon: linkedin
+      icon_pack: fab
+      url: https://www.linkedin.com/in/colin-renville-388060150/
+    - icon: github
+      icon_pack: fab
+      url: https://github.com/renville-colin
+  socialInFooter: yes
+  socialInHeader: no
+  textFontFamily: sans-serif
+  theme: peach
+  twitter: apreshill
+  utterances:
+    issue_term: pathname
+    label: 'comments :crystal_ball:'
+    repo_name: hugo-apero/apero
+    theme: boxy-light
+    use_utterances: yes
+taxonomies:
+  category: categories
+  series: series
+  tag: tags
+menu:
+  footer:
+    - name: License
+      title: License
+      url: /license/
+      weight: 1
+    - name: Contact
+      title: Contact form
+      url: /contact/
+      weight: 2
+    - name: Contributors
+      title: Contributors
+      url: /contributors/
+      weight: 3
+  header:
+    - name: About
+      title: About Apéro
+      url: /about/
+      weight: 1
+    - name: Get started
+      title: Get started using the Hugo Apéro theme
+      url: /get-started/
+      weight: 2
+    - name: Learn
+      title: learn more about using the Hugo Apéro theme
+      url: /learn/
+      weight: 3
+    - name: Projects
+      title: Project Portfolio
+      url: /project/
+      weight: 4
+    - name: Talks
+      title: Talks
+      url: /talk/
+      weight: 5
+    - name: Elements
+      title: Element Page
+      url: /elements/
+      weight: 6
+privacy:
+  disqus:
+    disable: no
+  googleAnalytics:
+    anonymizeIP: yes
+    disable: no
+    respectDoNotTrack: yes
+  instagram:
+    disable: no
+    simple: yes
+  twitter:
+    disable: no
+    enableDNT: yes
+    simple: no
+  vimeo:
+    disable: no
+    enableDNT: yes
+    simple: yes
+  youtube:
+    disable: no
+    privacyEnhanced: yes
