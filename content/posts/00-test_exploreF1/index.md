@@ -18,15 +18,11 @@ weight: 1
 
 # Analysis Focus
 
-<br/>
-
 This analysis is intended to be an introduction to Formula One qualifying data and a demonstration on how to prepare and clean data for a descriptive analysis on Track Evolution using machine learning and statistical modeling.
 
 <br/>
 
 # Introduction to Formula One
-
-</br>
 
 Formula One is a complicated sport. One way it captivates in its uniqueness from other motor sports in that the definition of "success" isn't simply about one driver, but massive teams of engineers building the best car possible over the course of a season. For the ten teams currently racing in Formula One there are a variety of ways to achieve success over the course of the season, but the first priority is to win the World Constructors Championship. This is done by each of a team's respective two drivers [combining for the most points](https://inews.co.uk/sport/formula-one/f1-points-2021-scoring-system-how-many-win-places-407130) compared to any other teams' two drivers on the grid through the course of the season. 
 
@@ -64,18 +60,13 @@ Fortunately, there are now ways for the general public to capture F1 data, and t
 
 
 ```r
-
 Sys.setenv(RETICULATE_PYTHON = "/Users/colinrenville/.pyenv/versions/3.9.9/bin/python3.9")
-
-
 ```
 
 [With this code](https://github.com/renville-colin/f1_track_evo/blob/main/ExploreF1_data_pull.py), the functions created in Python and the *source_python* function allows us to use these in the R environment.
 
 ```r
-
 reticulate::source_python("ExploreF1_data_pull.py")
-
 ```
 
 # Analyzing one race weekend: Abu Dhabi 
@@ -83,13 +74,11 @@ reticulate::source_python("ExploreF1_data_pull.py")
 Now we can call the function: **get_driver_data**, and load data for the Abu Dhabi's 2021 qualifying session. 
 
 ```r
-
 ad_quali_2021_l <- get_driver_data(season = '2021',
                                    circuit = 'Abu Dhabi',
                                    session = 'Q',
                                    driver = 'ALL',
                                    data_type = 'laps')
-
 ```
 
 </br>
@@ -245,9 +234,9 @@ ad_quali_2021_l %>%
 
 What is LapTime5? This is a calculated column by me to use in cases where there is no value for LapTime, but we can calculate what a driver's lap time is by using other fields that *are* filled. 
 
-**For example...**
+<br/> 
 
-<br/>
+**For example...**
 
 #### 1. Laps with missing sector times
 
@@ -290,10 +279,7 @@ ad_quali_2021_l %>%
          LapTime5) %>%
     filter(if_any(all_of(selected_lap_vars), is.na)) %>%
   filter(Driver == "NOR" & LapNumber == 5) %>%
-  kbl() %>%
-  kable_styling(position = "center") # will need to trial and error this one once uploaded to blog
-
-
+  as.data.frame()
 ```
 
 ```
@@ -311,7 +297,6 @@ Below, we can simply take the (Sector2SessionTime: 3351.012 - PitOutTime: 3274.0
 
 
 ```r
-
 ad_quali_2021_l %>%
   select(Driver, DriverNumber, LapNumber, PitInTime, PitOutTime,
          Sector1SessionTime, Sector2SessionTime, Sector3SessionTime,
@@ -319,10 +304,7 @@ ad_quali_2021_l %>%
          LapTime5) %>%
     filter(if_any(all_of(selected_lap_vars), is.na)) %>%
   filter(Driver == "BOT" & LapNumber == 12) %>%
-  as.data.frame() %>%
-  kbl() %>%
-  kable_styling(position = "center") # will need to trial and error this one once uploaded to blog
-
+  as.data.frame()
 ```
 
 ```
@@ -374,11 +356,9 @@ One key piece of information that we know is that each break, between the first 
 
 
 ```r
-
 # breaks in between quali sessions are 300 seconds / 5 minutes
 
 break_seconds <- 300
-
 ```
 
 

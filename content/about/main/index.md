@@ -8,9 +8,9 @@ show_intro: true
 intro: |
   I am an analyst with experience in the insurance, lottery, and video game industries. I have always loved using data as a tool for providing insights and I am lucky to have been able to follow a career path that lets me do that every day.
   
-  I aspire to continue progressing down the path of a data scientist, with the goal that this blog will allow me to demonstrate skills that I learn through pet projects with the focus on applying statistical concepts to real-world data problems.
+  I aspire to continue progressing down the path of a data scientist, with the goal that this blog will allow me to demonstrate skills that I learn through pet projects with the focus on applying statistical concepts to real-world data problems. I am an avid learner of R, and specifically enjoy to dive into the Tidyverse packages.
   
-  Currently, I live in Austin, TX and I graduated from the University of Kansas in 2018 - Rock Chalk. In my free time, I really enjoy trying new coffees, watching Formula One - and most other sports - on the weekends, and just generally finding any impulsive adventure that I can go on.
+  Currently, I live in Austin, TX and I graduated from the University of Kansas - Rock Chalk. In my free time, I really enjoy trying new coffees, watching Formula One - and most other sports - on the weekends, and just generally finding any impulsive adventure that I can go on.
 
 show_outro: false
 outro: |
