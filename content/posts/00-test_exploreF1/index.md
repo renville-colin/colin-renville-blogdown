@@ -1239,8 +1239,7 @@ quali_gam_df %>%
   unpack_safely(col = "pred_data",
                 add_conf = TRUE) %>%
   head() %>%
-  as.data.frame() %>%
-  kbl()
+  as.data.frame()
 ```
 
 ```
