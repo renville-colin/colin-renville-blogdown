@@ -918,6 +918,31 @@ ad_quali_2021_l_fast_compile <- ad_quali_2021_l %>%
   inner_join(ad_compile_q3_drivers, by = c("Driver" = "Driver",
                                            "raceName" = "raceName")) %>%
   filter(hclust == 1)
+  
+# drivers remaining
+
+ad_quali_2021_l_fast_compile %>%
+  group_by(DriverNumber, Driver) %>%
+  summarize(total_fast_laps = n(),
+            max_session_number = max(as.numeric(as.character(session_number_coal))))
+  
+```
+
+```
+# A tibble: 10 × 4
+# Groups:   DriverNumber [10]
+   DriverNumber Driver total_fast_laps max_session_number
+   <chr>        <chr>            <int>              <dbl>
+ 1 11           PER                  8                  3
+ 2 16           LEC                  8                  3
+ 3 22           TSU                  7                  3
+ 4 3            RIC                  6                  3
+ 5 31           OCO                  7                  3
+ 6 33           VER                  5                  3
+ 7 4            NOR                  7                  3
+ 8 44           HAM                  6                  3
+ 9 55           SAI                  6                  3
+10 77           BOT                  7                  3
 ```
 
 
