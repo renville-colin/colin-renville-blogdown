@@ -1234,16 +1234,13 @@ The objects that are created for each qualifying session are:
     - The dataframe created that contains one lap, per team, per qualifying session, all on soft compound tires. This is the dataframe that allows us to analyze the many GAM models on data that may have not been seen in the actual qualifying sessions.
     
 ```r
-
 quali_gam_df %>%
   dplyr::filter(raceName == "Bahrain Grand Prix") %>%
   unpack_safely(col = "pred_data",
                 add_conf = TRUE) %>%
   head() %>%
   as.data.frame() %>%
-  kbl() %>%
-  kable_styling(position = "center")
-
+  kbl()
 ```
 
 ```
@@ -1262,15 +1259,11 @@ quali_gam_df %>%
     - A dataframe that contains *pred_data* and additional columns for GAM model outputs that result from applying the *gam_model* to *pred_data*. 
 
 ```r
-
 quali_gam_df %>%
   dplyr::filter(raceName == "Bahrain Grand Prix") %>%
   unpack_safely(col = "preds_new",
                 add_conf = TRUE) %>%
-  head() %>%
-  kbl() %>%
-  kable_styling(position = "center")
-
+  head()
 ```
 
 ```
