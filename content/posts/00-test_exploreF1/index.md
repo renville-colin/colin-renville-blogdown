@@ -26,31 +26,33 @@ This analysis is intended to be an introduction to Formula One qualifying data a
 
 # Introduction to Formula One
 
-Formula One is a complicated sport. One way it captivates in its uniqueness from other motor sports in that the definition of "success" isn't simply about one driver, but massive teams of engineers building the best car possible over the course of a season. For the ten teams currently racing in Formula One there are a variety of ways to achieve success over the course of the season, but the first priority is to win the World Constructors Championship. This is done by each of a team's respective two drivers [combining for the most points](https://inews.co.uk/sport/formula-one/f1-points-2021-scoring-system-how-many-win-places-407130) compared to any other teams' two drivers on the grid through the course of the season. 
+Formula One is a complicated sport. One way in particular that it separates itself from other motor sports in that the definition of "success" isn't simply about one driver, but massive teams of hundreds or even thousands with the goal of building the best car possible and improving it over the course of a season. For the ten constructors (teams) currently racing in Formula One there are a variety of ways to achieve relative-success, but the first priority for every constructor to win the World Constructors Championship. This is done by each of a team's respective two drivers [combining for the most points](https://inews.co.uk/sport/formula-one/f1-points-2021-scoring-system-how-many-win-places-407130) compared to any other teams' two drivers on the grid during the season. 
 
 <br/>
 
-Following the desire of wanting to know exactly to judge what contributes to a (Formula One) team's success can lead fans to a continuous and contentious cycle of questions. For example, these questions may be:
+Wanting to know what contributes to a constructors' success can lead fans to a continuous and contentious cycle of questions. For example, these questions may be:
 
   - Was one of a team's drivers faster than the other?
-  - Are individual teams generally faster than others?
+  - Are individual teams building cars that are generally faster than others'?
   - What contributes to a team being fast?
 
 <br/>
 
-The problem to directly answering a lot of questions about driver skill or pace is that there are a lot of influences on driver performance that are not, well, a driver's performance. While F1 features some of the best racing drivers in the world, you don't need to be an expert of the sport to realize that the car a team builds for the driver will generally be the biggest gainer in lap time for the average driver. For starters, you can put the best drivers in the sport today - Lewis Hamilton or Max Verstappen - in the 2021 Haas and they are likely not scoring a point in the season, let alone battling for the World Drivers Championship during the last race of the season in Abu Dhabi.
+The problem to directly answering a lot of questions about driver skill or pace is that there are a lot of influences on driver performance that are not, well, a driver's performance. While F1 features some of the most-skilled racing drivers in the world, the car that a driver's team builds for them will generally be the biggest factor in their success over the long-term. For starters, you can put the best drivers in the sport today - drivers near thte likes of Lewis Hamilton or Max Verstappen - in the 2021 Haas and they are likely not scoring a point during the season, let alone battling for the World Drivers Championship at the last race of the season in Abu Dhabi.
 
 <br/>
 
-So we know that drivers across different teams cannot be compared on a level playing field, due to car speed and different strengths and weaknesses of each team's car that individual drivers must adapt to, but there are also other factors to consider. I would like to think we could use race results to compare drivers within teams, but even then there are many factors at play during the race. For instance, F1 cars have many different engine modes and energy mappings (known as [KERS: Kinetic Energy Recovery System](https://www.racecar-engineering.com/articles/the-basics-of-f1-kers/)), or more-simply put: ways to pick-and-choose *when and where* to maximize speed of the car throughout a lap around a track. 
+So we know that drivers across different teams cannot be compared on a level playing field, due to car speed and different strengths and weaknesses of each team's car that individual drivers must adapt to, but there are also other factors to consider. I would like to think we could use race results to compare drivers within teams, but even then there are many factors at play during the race. For instance, F1 cars have many different engine modes and mappings to deploy stored energy (known as [KERS: Kinetic Energy Recovery System](https://www.racecar-engineering.com/articles/the-basics-of-f1-kers/)), or more-simply put: ways to pick-and-choose *when and where* to maximize speed of the car throughout a lap around the circuit. 
 
 <br/>
 
-So now that we can generally rule out the race as a level-playing field for analysis, we can turn our attention to qualifying. Qualifying is perhaps the only session in a Grand Prix weekend in which drivers within teams can be judged on a level playing field. The goal for qualifying is simple: go as fast as possible over one lap. While it is very possible for some drivers to be faster over one lap and there may be some general set up differences (faster through corners at a cost of straight-line speed or vice-versa), rather than in race conditions, this is the only time for a team's drivers to be on equal engine modes and fuel levels. So with that, we know that there is one additional variable that plays into *all* cars' performance throughout a session, which is a term known as **track evolution**. 
+So now that we can generally rule out the race as a level-playing field for analysis, we can turn our attention to another event during the race weekend: qualifying. Qualifying is perhaps the only session in a Grand Prix weekend in which drivers within teams can be judged on a level playing field. The goal for qualifying is simple: go as fast as possible over one lap. While it is very possible for some drivers to be faster over one lap and there may be some general set up differences (faster through corners at a cost of straight-line speed or vice-versa), rather than in race conditions, this is the only time for a team's drivers to be on equal engine modes and similar fuel levels. So with that, we know that there is one additional variable that plays into *all* cars' performance throughout a session, which is a term known as **track evolution**. 
 
 <br/>
 
-Track evolution is what we'll primarily be interested in exploring for this analysis, and is the result of track conditions improving as more laps are run throughout a session under dry conditions. As F1 cars race around a track, their tires shed large amounts of rubber as they wear which gets ingrained into the fibers, cracks, and crevices of a track's surface. As this happens, cars have more-and-more grip as the rubber from tires meets the progressively-grippier and rubber-filled track surface. This phenomenon is a big reason why lap times typically improve, for all teams, as a session progresses. So how can we analyze this? 
+Track evolution is what we'll primarily be interested in exploring for this analysis, and is the result of track conditions becoming more conducive to faster laps as more laps are run throughout a session (under dry conditions). As F1 cars drive around a track, their tires shed large amounts of rubber as they wear which gets ingrained into the fibers, cracks, and crevices of a track's surface. As this happens, cars have more-and-more grip as the rubber from tires meets the progressively-grippier and rubber-filled track surface. This phenomenon is a big reason why lap times typically improve, for all teams, as a session progresses. 
+
+So how can we attempt to analyze this effect?
 
 
 <br/>
@@ -58,14 +60,14 @@ Track evolution is what we'll primarily be interested in exploring for this anal
 
 ## Data Acquisition
 
-Fortunately, there are now ways for the general public to capture F1 data, and thanks to the [FastF1 API](https://theoehrly.github.io/Fast-F1/), it is possible for me to get my hands on and analyze. The one caveat to this API is that it utilizes Python, while I am more adept with a statistical programming language known as R. Because of this, I had create the functions to extract the data in Python and transfer that data to R in order for me to be more-comfortable in data preparation and analysis. 
+Fortunately, there are now ways for the general public to capture F1 data, and thanks to the [FastF1 API](https://theoehrly.github.io/Fast-F1/), it is possible for me to get my hands on and analyze. The one caveat to this API is that it utilizes Python, while I am more adept with a statistical programming language known as R. Because of this, I had to create the functions to extract the data in Python and use an R package called **reticulate** to load that data into R. 
 
 
 ```r
 Sys.setenv(RETICULATE_PYTHON = "/Users/colinrenville/.pyenv/versions/3.9.9/bin/python3.9")
 ```
 
-[With this code](https://github.com/renville-colin/f1_track_evo/blob/main/ExploreF1_data_pull.py), the functions created in Python and the *source_python* function allows us to use these in the R environment.
+[With this code](https://github.com/renville-colin/f1_track_evo/blob/main/ExploreF1_data_pull.py), there are various functions that I have created in a Python script which allows us to call on the *source_python* function from the **reticulate** package to call the functions created in Python from R. 
 
 ```r
 reticulate::source_python("ExploreF1_data_pull.py")
@@ -73,7 +75,7 @@ reticulate::source_python("ExploreF1_data_pull.py")
 
 # Analyzing one race weekend: Abu Dhabi 
 
-Now we can call the function: **get_driver_data**, and load data for the Abu Dhabi's 2021 qualifying session. 
+Now we can call the function: **get_driver_data** directly from R, and load data for the Abu Dhabi's 2021 qualifying session. 
 
 ```r
 ad_quali_2021_l <- get_driver_data(season = '2021',
@@ -109,15 +111,15 @@ ad_quali_2021_l %>%
 
 <br/>
 
-Ouuuch. Even for this small sample of laps for Lewis Hamilton, already, I will list out some issues that I see:
+Even for this small sample of laps for Lewis Hamilton, already, I will list out some issues that I see:
 
 1. There are particular values labeled "NaN". These are values that are missing entirely.
 2. The LapTime column has values that vary heavily.
 
 
-## Data cleaning and preparation
+## Data Cleaning and Preparation
 
-Digging into the LapTime column, and relating it to what's happening in a qualifying session for a driver, we can theorize why there might be no lap time for a driver, or why there would be a high or low value for a lap time when it does exist. The answer is simple as this dataset gives us a row for every single time a driver passes the start/finish line. This forces us to think about what we truly want out of this analysis. For instance, drivers will almost always exit the pit lane and coast around the track prior to their fast lap to avoid tire wear, and then once again coast around to the pits following their run. We do not want these laps included in our analysis of track evolution, and creating our first plot below of all lap times we can see why this is problematic. 
+Digging into the LapTime column, and relating it to what's happening in a qualifying session for a driver, we can theorize why there might be no lap time for a driver, or why there would be a high or low value for a lap time when it does exist. The answer is pretty simple in that this dataset effectively gives us a row of data for every time a driver passes the start/finish line. This forces us to think about what we truly want out of this analysis. For instance, drivers will almost always exit the pit lane and coast around the track (Out Lap) prior to their fast lap to avoid tire wear, and then once again coast around to the pits following their fast lap (In Lap). We do not want these In Laps and Out Laps included in our analysis of track evolution, and creating our first plot below of all lap times we can see why this is problematic. 
 
 
 ```r
@@ -140,9 +142,9 @@ ad_quali_2021_l %>%
 
 ![](images/ad_21_q_laps_all.png)
 
-Now that's a mess! But, it's an informative mess. We can see genuine separation for Lap Times between what we can assume to be fast laps (huddled around the 1M 25S mark of the y axis) and slow laps that seemingly have more variance in comparison.
+Now that's kind of a a mess - but, it's an informative mess. We can see genuine separation for Lap Times between what we can assume to be fast laps (huddled around the 1M 25S mark of the y axis) and slow laps at higher times on the y-axis that also have more variance in comparison.
 
-This is where the data cleaning really begins. And instead of just posting a blob of code, I aim to show specific cases of incorrect data and what I am doing to treat these cases. 
+This is where the data cleaning really begins. And while the next code chunk may be a blob of code, I aim to at least show specific cases of incorrect data and what I am doing to treat these cases. 
 
 Below will be data cleaning for the following cases:
 
@@ -214,17 +216,12 @@ This lap below by Lewis Hamilton, is a lap we know to be his last fast lap attem
 
 
 ```r
-
 ad_quali_2021_l %>%
   select(Driver, DriverNumber, LapNumber, PitInTime, PitOutTime,
            Sector1SessionTime, Sector2SessionTime, Sector3SessionTime,
            Sector1Time, Sector2Time, Sector3Time, LapTime,
            LapTime5) %>%
-  filter(Driver == "HAM" & LapNumber == 17) %>%
-  kbl() %>%
-  kable_styling(position = "center")
-  
-
+  filter(Driver == "HAM" & LapNumber == 17) 
 ```
 
 ```
@@ -257,11 +254,11 @@ ad_quali_2021_l %>%
 
 ```
 
-For our first problematic lap example below, it is one of the more common cases in which a driver enters or exits the pit lane during the lap. By F1 standards, this makes sense as to why there isn't an official lap time as the entrance of pit lane is prior to the start/finish line and the exit of pit lane is after the start/finish line. So this leads to a bit of a gap in the data for these "In Laps" and "Out Laps".
+For our first problematic lap example below, it is one of the more common cases in which a driver enters or exits the pit lane during the lap. By F1 standards, this makes sense as to why there isn't an official lap time as the entrance of pit lane is prior to the start/finish line and the exit of pit lane is after the start/finish line. So this leads to a bit of a gap in the data for these In Laps and Out Laps.
 
 <br/>
 
-Below is an "In Lap" from Lando Norris. He had just finished a fast lap and is coasting around the track to come in to the pits between fast laps runs. Unfortunately, there is a very odd combination of missing fields from the data below. We are missing Sector 2 and Sector 3 information, which in turn leads to a missing LapTime. Fortunately, we can back into a derived lap time as you can probably see with our LapTime5 variable being populated below. 
+Below is an In Lap from Lando Norris. He had just finished a fast lap and is coasting around the track to come in to the pits between fast laps runs. Unfortunately, there is a very odd combination of missing fields from the data below. We are missing Sector 2 and Sector 3 information, which in turn leads to a missing LapTime. Fortunately, we can back into a derived lap time as you can probably see with our LapTime5 variable being populated below. 
 
 <br/>
 
@@ -293,6 +290,8 @@ ad_quali_2021_l %>%
 
 <br/>
 
+#### 2. Laps with missing lap times
+
 For this next example, we've got a case that's a little more straightforward. This is a slow Out Lap by Valterri Bottas. This lap has populated data for sectors 2 and 3, with missing data for sector 1. This seems to be because of exiting the pit lane, which is somewhere near the middle of sector 1. Once again, this is an edge case in the data and we will treat these particular set of cases as if the exit of the pit lane is the beginning of these slow laps. We can get away with this because slow laps in F1 are generally very slow in comparison to fast laps - the few seconds "gained" from starting a drivers slow lap from the exit of the pit lane (which we know) instead of the start/finish line (which we don't know) will not hurt us for this analysis. 
 
 Below, we can simply take the (Sector2SessionTime: 3351.012 - PitOutTime: 3274.034) to yield our sector 1 time of 30.85. Then we can take our derived Sector1Time: 30.85 + Sector2Time: 46.128 + Sector3Time: 71.12 to give us our calculated LapTime5 of 148.098. Another really slow lap, but we now at least have a lap time for it. 
@@ -317,12 +316,11 @@ ad_quali_2021_l %>%
 ```
 
 
-#### 2. Calculating qualifying sessions
+#### 3. Data with no session numbers
 
-I am going to bring back the plot from above, to dive into more details that I left out before. Before, I mentioned the separation in lap times from top to bottom on the y-axis. But if you look on the x-axis, for session progress, you'll notice that there are clear separations there as well. This leads us to our next section of data cleaning: for qualifying sessions - which we actually do not have data for in this dataset.
+I am going to bring back the plot from above from the start of the Data Cleaning and Preparation section, to dive into more details that I left out before. Before, I mentioned the separation in lap times from top to bottom on the y-axis. But if you look on the x-axis, for session progress, you'll notice that there are clear separations there as well. This leads us to our next section of data cleaning: for qualifying sessions - which we actually do not have data for in this dataset.
 
 ```r
-
 ad_quali_2021_l %>%
   ggplot(aes(x = LapStartTime, y = LapTime)) +
   geom_point(color = "#5a0d9e",
@@ -342,20 +340,17 @@ ad_quali_2021_l %>%
              linetype = "dashed") +
   theme_main() +
   theme_main_add() 
-
 ```
 
 ![](images/ad_21_laps_all_part.png)
 
 <br/>
 
-In Formula One, qualifying is done by way of elimination across three sessions. For the first session, all 20 drivers on the grid have 18 minutes to score as fast of a lap as possible. At the end of the first 18 minutes, the 5 drivers with the slowest lap times are eliminated, with their starting position set for the race. Session 2 features 15 minutes for the remaining 15 drivers to do the same thing again, until the next 5 drivers with the slowest lap times are eliminated before the final, 12 minute session featuring the remaining 10 drivers. 
+Qualifying is done by way of elimination across three sessions. For the first session, all 20 drivers on the grid have 18 minutes to score as fast of a lap as possible. At the end of the first 18 minutes, the 5 drivers with the slowest lap times are eliminated, with their starting position set for the race. Session 2 features 15 minutes for the remaining 15 drivers to do the same thing again, until the next 5 drivers with the slowest lap times are eliminated before the final, 12 minute session featuring the remaining 10 drivers. 
 
-Unfortunately, the data at-hand does not include data for the session number within qualifying. Because of this, we need to create logic to derive this so that we can then use it in our analysis. 
+Unfortunately, the data at-hand does not include data for the session number within qualifying. Because of this, logic needs to be created to derive this so that it can be used in the analysis.
 
 One key piece of information that we know is that each break, between the first and second qualifying sessions (referred to as Q1 and Q2) is at least five minutes long. Judging by F1 qualifying footage from the 2021 season, this timer begins once the track is clear from the ending session. This information allows us to store this as a variable in R (in seconds) and then proceed with our logic. 
-
-
 
 ```r
 # breaks in between quali sessions are 300 seconds / 5 minutes
@@ -363,20 +358,19 @@ One key piece of information that we know is that each break, between the first 
 break_seconds <- 300
 ```
 
-
 While the below code is a total blob of text, the important thing to know is that it creates session numbers for Abu Dhabi's qualifying session. This is done with the following assumptions in mind: That the only 5 minute periods without a lap completed in a qualifying session are the breaks in qualifying.
 
-As a prelude for the rest of this data cleaning exercise, and for a spoiler for what the rest of the 2021 season's qualifyings look like - Abu Dhabi had a very clean qualifying session that holds this assumption. While there was a quick red flag during Abu Dhabi's qualifying, this was probably the quickest of the year to simply remove loose debris from the track near the end of the first session.
+Abu Dhabi had a relatively-clean qualifying session that holds this assumption. While there was a quick red flag during the first session of Abu Dhabi's qualifying, this was the quickest of the year to simply remove loose debris from the track near the end of the first session.
 
-There were numerous qualifying sessions throughout the season that did not hold our key assumption above, which will need additional more-stringent and case-specific data cleaning (Part 2!). 
+There were numerous qualifying sessions throughout the season that did not hold our key assumption above, which require need more-stringent and case-specific data cleaning. 
 
-Things that worked for Abu Dhabi, but *may* not work for other qualifyings:
+Things that worked for Abu Dhabi's data cleaning logic, but prove problematic for data cleaning are:
 
-  - Red flags in qualifying ( more-prevalent in recent seasons) lasting more than 5 minutes
+  - Red flags in qualifying, causing any two laps by any driver to be more than 5 minutes apart
   - There always being two laps in a session within 5 minutes of each other
+    - This could be caused by bad data in theory
 
 ```r
-
 quali_reference_data <- ad_quali_2021_l %>%
   mutate(Sector1Time_outlap = ifelse(!is.na(PitOutTime), (Sector2SessionTime-PitOutTime-Sector2Time), NA),
          # LapStartTime alone should not be used for this logic
@@ -402,15 +396,35 @@ quali_reference_data <- ad_quali_2021_l %>%
             session_break_flag_coal, last_LapStartTime, last_LapStartTime_delta, 
             session_break_flag, session_break_flag2)) # removing all columns that were added
   
+  
+quali_reference_data %>%
+  select(Time, DriverNumber, LapTime5, session_number_coal, LapNumber) %>%
+  as.data.frame() %>%
+  slice(c(160:170))
 ```
 
-Above, we created an additional variable / column in our dataset for session number. Now that this variable is created, we can validate that its behavior matches what we expect - shown below by creating a summary table of this new session number variable.
+```
+       Time DriverNumber LapTime5 session_number_coal LapNumber
+1  2262.480           18  103.234                   1        10
+2  2275.538           31  109.426                   1         8
+3  2285.996           14  113.733                   1         6
+4  2289.222           55  111.848                   1        10
+5  2293.664           16  111.026                   1        11
+6  2685.807           44  102.494                   2         7
+7  2723.564            5  113.884                   2        11
+8  2691.848           77  104.832                   2         7
+9  2738.748           99  107.728                   2        10
+10 2708.505           22  117.397                   2        10
+11 2704.237           10  114.833                   2        10
+
+```
+
+Above, there is an additional variable / column created in the lap dataset for session number: *session_number_coal*. Now that this variable is created, we can validate that its behavior matches what we expect - shown below by creating a summary table of this new session number variable.
 
 Below, we can see that - for each session - we can calculate the number of unique drivers, earliest and latest times in which a lap started, and if there was a red flag (1:yes, 0:no). According to our summary table, we've got 20 drivers in Q1, 15 in Q2, and 10 in Q3, along with at least 5 minutes (300 seconds) between the highest lap start time in Q1 and lowest lap start time in Q2, .etc. Everything looks good on the surface. 
 
 
 ```r
-
 # aggregate to impute quali session start times
 
 quali_reference_agg_coal <- quali_reference_data %>%
@@ -428,40 +442,66 @@ quali_reference_agg_coal %>%
          "Num_of_Drivers" = "dis_Drivers",
          "min_Session_LapStartTime" = "min_coal_LapStartTime",
          "max_Session_LapStartTime" = "max_coal_LapStartTime",
-         "RedFlag" = "max_RedFlag") %>%
-  kbl() %>%
-  kable_styling(position = "center")
-
+         "RedFlag" = "max_RedFlag")
 ```
 
-```
+Now we've got a reference table of sorts...
 
+```
   SessionNumber Num_of_Drivers min_Session_LapStartTime max_Session_LapStartTime RedFlag
 1             1             20                  903.118                 2182.638       1
 2             2             15                 2583.313                 3547.218       0
 3             3             10                 3963.465                 4772.495       0
-
 ```
 
 <br/>
 
+... that we can join onto our primary, lap-level dataset
 
 ```r
-
 ad_quali_2021_l <- ad_quali_2021_l %>%
   fuzzyjoin::fuzzy_join(quali_reference_agg_coal,
                     by = c("coal_LapStartTime" = "min_coal_LapStartTime",
                            "coal_LapStartTime" = "max_coal_LapStartTime"),
                     match_fun = list(`>=`, `<=`))
+                    
+# using verstappens whole quali as example
+
+ad_quali_2021_l %>%
+  dplyr::filter(DriverNumber == "33") %>%
+  select(Time, DriverNumber, LapTime5, session_number_coal) %>%
+  as.data.frame()
+```
 
 ```
+       Time DriverNumber LapTime5 session_number_coal
+1  1033.438           33  115.558                   1
+2  1117.118           33   83.680                   1
+3  1256.346           33  139.228                   1
+4  1373.118           33  116.772                   1
+5  1456.440           33   83.322                   1
+6  1561.548           33  105.108                   1
+7  2699.616           33  103.320                   2
+8  2782.805           33   83.189                   2
+9  2934.311           33  151.478                   2
+10 3037.467           33  103.156                   2
+11 3447.822           33  164.328                   2
+12 3530.622           33   82.800                   2
+13 3641.571           33  110.949                   2
+14 4070.822           33  106.125                   3
+15 4152.931           33   82.109                   3
+16 4257.718           33  104.787                   3
+17 4615.119           33  124.254                   3
+18 4698.660           33   83.541                   3
+19 4806.851           33  108.191                   3
+```
+
 
 <br/>
 
-Now we can take all of the work that we have done to clean our data to this point and plot every lap along with separating these laps by the new session number variable that we derived.
+Now we can take all of the work that we have done to clean our data to this point and plot every lap, for all drivers, along with separating these laps by the new session number variable that we derived.
 
 ```r
-
 ad_quali_2021_l %>%
   ggplot(aes(x = coal_LapStartTime, y = LapTime5)) +
   geom_point(color = "#5a0d9e",
@@ -478,8 +518,6 @@ ad_quali_2021_l %>%
              scales = "free_x") +
   theme_main() +
   theme_main_add() 
-
-
 ```
 
 ![](images/ad_21_q_all_sesh.png)
@@ -488,12 +526,10 @@ ad_quali_2021_l %>%
 
 Above we have been able to look at laps individually, as the qualifying session progresses, but what can we actually get out of that? Not too much, with that plot at face value. One thing is definitely clear in that there is a large separation / high variance in individual laps. There is a high density of laps between 1M 20S and 1M 30S and many laps that are clearly separated from the fastest set of laps from roughly 1M 35S and higher. 
 
-We can summarize these lap times in a histogram for the entire qualifying session to visualize this a bit better. In the histogram, we can see two definite peaks in the distribution. The first peak that stands out is the stark number of laps that we can group together in the 1M 20S - 1M 25S range. The other peak is a more-gradual, less-dense peak that contain much slower lap times.
+We can summarize these lap times in a histogram below for the entire qualifying session to visualize this a bit better. In the histogram, we can see two definite peaks in the distribution. The first peak that stands out is the stark number of laps that we can group together in the 1M 20S - 1M 25S range. The other peak is a more-gradual, less-dense peak that contain much slower lap times.
 
 
 ```r
-
-# p_ad_all_laps <- 
 ad_quali_2021_l %>%
   # filter(is.na(PitOutTime),
   #        is.na(PitInTime)) %>%
@@ -516,7 +552,6 @@ ad_quali_2021_l %>%
              color = "red") +
   theme_main() +
   theme_main_add()
-
 ```
 
 ![](images/ad_21_q_hist1.png)
@@ -529,16 +564,16 @@ What we see here is the effect of drivers taking their slow laps versus their fa
 2. Fast Lap begins once the driver makes it around the track and to the start / finish line, puts in full effort pushes the car to the limit
   - At very niche tracks, such as Monaco, drivers may do multiple fast laps - but this is very rare throughout the season as a whole
 
-3. After a driver's fast lap(s), they'll begin their In Lap which is a slow trek around the circuit and back into the pit lane and then the garage to refuel and change tires, if desired
+3. After a driver's fast lap(s), they'll begin their In Lap which is generally a slow trek around the circuit and back into the pit lane and then the garage to refuel and change tires, *if desired*
 
-Since we are looking to purely look to measure how much faster *Fast* Laps are getting throughout qualifying sessions, we need to design a way to efficiently predict to a reasonably-accurate degree if a lap as a Fast Lap or a Slow Lap. Consistent with the session number work above, the dataset we are using does not tell us if a driver is on a Fast Lap or not. This interpretation between Fast and Slow laps is also something that can be subjective, which I will detail later on. 
+Since we are looking to purely look to measure how much *faster* Fast Laps are getting throughout qualifying sessions, we need to design a way to efficiently predict to a reasonably-accurate degree if a lap as a Fast Lap or a Slow Lap. Consistent with the session number work above, the dataset we are using does not tell us if a driver is on a Fast Lap or not. This interpretation between Fast and Slow laps is also something that can be subjective, which I will detail later on. 
 
 <br/>
 
 
 ## Clustering
 
-In order to lay the groundwork for my idea on predicting a Fast Lap vs. a Slow lap, let's look at a specific set of laps by Max Verstappen. This set of four laps was a stint from Verstappen's qualifying to begin Q2. Recalling our derived variable for lap times, LapTime5, we can see that the data shows a slow Out Lap, a fast lap, a slow lap, and the sting ends with a slow, In Lap. They key note here is the definite separation between Verstappen's fast lap at 83.189 seconds that are all over 100 seconds. Assuming that there is this kind of separation in time between most slow laps and fast laps, we should be able to predict for these using the right tools. 
+In order to lay the groundwork for my idea on predicting a Fast Lap vs. a Slow lap, let's look at a specific set of laps by Max Verstappen. This set of four laps was a stint from Verstappen's qualifying to begin Q2. Recalling our derived variable for lap times, LapTime5, we can see that the data shows a slow Out Lap, a fast lap, a slow lap, and the stint ends with a slow, In Lap. They key note here is the definite separation between Verstappen's fast lap at 83.189 seconds that are all over 100 seconds. Assuming that there is this kind of separation in time between most slow laps and fast laps, we should be able to predict for these using the right tools. 
 
 
 ```r
@@ -570,7 +605,6 @@ ad_VER_focus_laps %>%
 The plot below shows where these three laps fit in to Verstappen's entire qualifying session. Note the sheer separation between the laps just higher than the 1M 20S mark compared to every other lap: 
 
 ```r
-
 ad_quali_2021_l %>%
   left_join(ad_VER_focus_laps %>% select(Driver, LapNumber, ver_focus_flag),
             by = c("Driver" = "Driver",
@@ -595,17 +629,16 @@ ad_quali_2021_l %>%
              scales = "free_x") +
   theme_main() +
   theme_main_add() 
-
 ```
 
 ![](images/ad_21_q_ver_focus.png)
 
 
-This brings us to the topic of **clustering**, a family of predictive models that we will explore to differentiate fast laps from slow laps. As a brief overview, in the machine learning realm there are many predictive models to use depending on the goal. These predictive models can be categorized between two types: Supervised and Unsupervised. 
+This brings us to the topic of **clustering**, a family of predictive models that we will explore to differentiate fast laps from slow laps. As a brief overview, in the machine learning realm there are many predictive models to use depending on the goal. These predictive models can largely be categorized between two types: Supervised and Unsupervised. 
 
 Supervised models are used when there is tangible data that exists for a dependent variable to predict for. An example of this could be having a dataset of wine ratings from a website with facts and attributes of those wines. In that case, wine ratings would be the dependent variable and we would have that not only to predict for, but also be able to directly know the accuracy / strength of the model created.
 
-Our dataset does not have data for a fast or slow "Lap Type", which is what we're interested in knowing. Because of this, we will use Unsupervised modeling to derive "Lap Type". 
+Our dataset does not have data for a fast or slow "Lap Type", which is what we're interested in knowing for this section of data prep. Because of this, we will use Unsupervised modeling to derive "Lap Type". 
 
 First, it's important to think about which laps we actually need to put effort into differentiating between fast and slow. The only laps that we're interested in classifying are laps that are **not** In Laps or Out Laps. Below, we separate our laps before anything else to show a better picture on a smaller subset of laps that will actually get categorized:
 
@@ -619,8 +652,6 @@ ad_quali_2021_l <- ad_quali_2021_l %>%
 # viz: splitting out relevant laps
 
 ad_quali_2021_l %>%
-  # filter(is.na(PitOutTime),
-  #        is.na(PitInTime)) %>%
   ggplot(aes(y = LapTime5, fill = could_cluster)) +
   geom_histogram(color = "black",
                  bins = 100,
@@ -643,16 +674,14 @@ ad_quali_2021_l %>%
 
 ![](images/ad_21_q_cluster_part.png)
 
-Here is a visualization of our goal: to separate laps in the "To Cluster" category between what we believe to be Fast Laps (below the dotted red line) from what we believe to be Slow Laps (above the dotted red line). This particular red line was manually placed there by me, but it represents what we're trying to replicate. Using a form of clustering known as [single-linkage Hierarchical Clustering](https://www.analyticsvidhya.com/blog/2021/06/single-link-hierarchical-clustering-clearly-explained/), we are looking for the point for the two laps with the most seconds between them and then using that point as our boundary for classifying Fast vs. Slow laps.
+
+<br/>
+
+Below is a visualization of our goal: to separate laps in the "To Cluster" category between what we believe to be Fast Laps (below the dotted red line) from what we believe to be Slow Laps (above the dotted red line). This particular red line was manually placed there by me, but it represents what we're trying to replicate. Using a form of clustering known as [single-linkage Hierarchical Clustering](https://www.analyticsvidhya.com/blog/2021/06/single-link-hierarchical-clustering-clearly-explained/), we are looking for the two laps with the most seconds between them and then using the space between those two laps as our boundary for classifying Fast vs. Slow laps.
 
 ```r
 
 ad_quali_2021_l %>%
-  # mutate(hclust = as.character(hclust),
-  #        hclust = case_when(is.na(hclust) ~ "NA",
-  #                           TRUE ~ as.character(hclust))) %>%
-  # filter(is.na(PitOutTime),
-  #        is.na(PitInTime)) %>%
   ggplot(aes(y = LapTime5, fill = could_cluster)) +
   geom_histogram(# fill = "purple",
                  color = "black",
@@ -664,11 +693,8 @@ ad_quali_2021_l %>%
        y = "Lap Time",
        color = "",
        caption = "Data: FastF1") +
-  # scale_x_continuous(breaks = seq(0,20,1)) +
   sec_lab_convert(axis = "y") +
   coord_cartesian(ylim = c(60, 200)) +
-  # facet_wrap(~as.factor(session_number_coal),
-  #            scales = "free_x") +
   geom_hline(aes(yintercept = ifelse(could_cluster == "To Cluster", 93, NA),
                  group = raceName,
                  color = "Attempted cutoff"),
@@ -679,9 +705,6 @@ ad_quali_2021_l %>%
   scale_color_manual(values = c("Attempted cutoff" = "red")) +
   scale_fill_manual(values = c("To Cluster" = "#7a00f5",
                                "Dont Cluster" = "#ab511d")) +
-  # scale_fill_manual(values = c("1" = "#b81f4f",
-  #                              "2" = "#8400f0",
-  #                              "NA" = "#8a8a8a")) +
   theme_main() +
   theme_main_add()
 
@@ -696,7 +719,6 @@ So let's create our clustering model.
 First, we remove any laps that are either In Laps or Out Laps:
   
 ```r
-
 # hclust code here (non-function?)
 
 # create filtered data
@@ -707,10 +729,9 @@ exclude_list <- do.call(paste0, list(exclude))
 ad_quali_2021_l_clust <- ad_quali_2021_l %>%
   filter(if_all(all_of(exclude_list), ~ . == "0")) %>%
   select(Driver, LapNumber, LapTime5)
-
 ```
 
-And below, we use the **hclust()** function to create our hierarchical clustering model based off of LapTime5 only, and additionally designate this as a single-linkage model by using the *method = "single"* argument. We specify the number of clusters that we want to create with *cutree(2)*, one cluster for fast laps and one for slow laps. In our data, our clusters are stored in a variable named: *hclust*. In the last part of the code below, we join our cluster variable to our main dataset of Abu Dhabi qualifying laps - ad_quali_2021_l - that we've been working with for most of this project so far. 
+And below, we use the **hclust()** function from R to create a hierarchical clustering model based off of LapTime5 only, and additionally designate this as a single-linkage model by using the *method = "single"* argument. We specify the number of clusters to create with *cutree(2)*, one cluster for fast laps and one for slow laps. In our data, our clusters are stored in a variable named: *hclust*. In the last part of the code below, we join our cluster variable to our main dataset of Abu Dhabi qualifying laps - ad_quali_2021_l - that we've been working with for most of this project so far. 
 
 From here on:
 
@@ -720,7 +741,6 @@ From here on:
   
 
 ```r
-  
 # create hclust on filtered data
 
 ad_quali_2021_l_clust$hclust <- ad_quali_2021_l_clust %>%
@@ -734,13 +754,11 @@ ad_quali_2021_l_clust$hclust <- ad_quali_2021_l_clust %>%
 
 ad_quali_2021_l <- ad_quali_2021_l %>%
   left_join(select(ad_quali_2021_l_clust, -LapTime5), by = c("Driver", "LapNumber"))
-
 ```
 
-Now we can return to our set of 4 Verstappen laps in Q2 and look at our hclust variable within the data. The two In Laps / Out Laps are shown as NA, the slow non-In Lap / Out Lap was predicted to be in cluster 2, with the much faster lap being predicted to be in cluster 1. 
+Now we can return to our set of 4 Verstappen laps in Q2 and look at the newly-created hclust variable within the data. The two In Laps / Out Laps are shown as NA, the slow non-In Lap / Out Lap was predicted to be in cluster 2, with the much faster lap being predicted to be in cluster 1. 
 
 ```r
-
 ad_VER_focus_laps <- ad_quali_2021_l %>%
   select(Driver, DriverNumber, LapNumber, PitInTime, PitOutTime,
          Sector1SessionTime, Sector2SessionTime, Sector3SessionTime,
@@ -752,10 +770,7 @@ ad_VER_focus_laps <- ad_quali_2021_l %>%
 
 
 ad_VER_focus_laps %>%
-  as.data.frame() %>%
-  kbl() %>%
-  kable_styling(position = "center") # will need to trial and error this one once uploaded to blog
-
+  as.data.frame() 
 ```
 
 ```
@@ -770,20 +785,11 @@ ad_VER_focus_laps %>%
 
 ### Aborted Laps
 
-Not all fast laps are "Fast Laps". 
+Even for laps that are intended as Fast Laps, there are cases in which these laps should not be classified as such. For example, drivers in Q1 or Q2 on the verge of eliminated may start a fast lap and then subsequently abort that lap at the last second if other drivers do not succeed in scoring faster laps - as there can be little to no point to finish a lap where there is another session to compete in and no danger of elimination. The code below specifically checks for cases where drivers had competitive Sector 1 and Sector 2 times in a lap, but fell off drastially in Sector 3. We assume these laps to be "aborted" and the logic removes them from the Fast Lap cluster - hclust: 1, if so. 
+
 
 ```r
-
-# revisit this tomorrow... need to add session break logic first..
-
-# session breaks havent been created yet, will need to walk through that before clustering
-## even in analysis, clusters are the last thing created in data cleaning step
-
 ad_quali_2021_l_clust1 <- ad_quali_2021_l %>%
-  # debug, remove
-  # dplyr::select(Driver, LapNumber, session_number_coal_f, PitInTime, PitOutTime, Sector3Time, scale_Sector3Time, LapTime5, hclust) %>%
-  # filter(Driver == "VER") %>% # VER, LapNumber 18 should not be NA.. actually, yes it should.. aborted lap at end
-  # debug, remove
   filter(hclust == 1) %>%
   select(season, raceName,Driver, DriverNumber, LapNumber, session_number_coal, lap_start_rownum, Compound, hclust, LapTime5, Sector3Time) %>%
   mutate(scaled_Sector3Time = scale(Sector3Time)) %>%
@@ -805,9 +811,6 @@ ad_quali_2021_l_clust1 <- ad_quali_2021_l %>%
   mutate(hclust1_final = hclust) %>% # think i can remove this
   select(Driver, LapNumber, hclust1_final)
 
-
-#
-
 ad_quali_2021_l <- ad_quali_2021_l %>%
   left_join(ad_quali_2021_l_clust1, by = c("Driver", "LapNumber")) %>%
   mutate(hclust = ifelse(hclust == 1 & is.na(hclust1_final), NA, hclust),
@@ -818,7 +821,7 @@ ad_quali_2021_l <- ad_quali_2021_l %>%
   
 <br/>
 
-### Filtering to relevant analysis data
+### Filtering to relevant analysis dataset
 
 So finally, we can create a plot that encompasses all of the work above, that:
 
@@ -859,15 +862,14 @@ ad_quali_2021_l %>%
 
 <br/>
 
-So let's think about this, we've now gotten to a point where we can look at **only** the fast laps from a qualifying session. Theoretically, if we were to begin an analysis now, we would almost certainly still see a decrease in overall lap times as the session progressed - as there is one variable still to account for: Car Strength.
+So, we've now gotten to a point where we can look at **only** the fast laps from a qualifying session. Theoretically, if we were to begin an analysis now, we would almost certainly still see a decrease in overall lap times as the session progressed - as there is one variable still to account for: Car Strength.
 
 <br/>
 
-(As I alluded to in the intro...) A nuance about Formula One compared to most, particularly American sports, is that there is historically very-little parity between the top teams and the bottom teams. So while, in the plot below, we see lap times decreasing from session 1-3, this *could* be due to track evolution or it could also be that the average performance of the cars remaining in Q3 are always going to be better than the cars in session participating in Q1. This brings up a problem of collinearity, which is a term in statistics used to describe multiple independent variables being associated with each other. So what does that mean? If we have track evolution decreasing lap times, and we have the general, increasing strength of the field decreasing lap times, then being able to measure the effect that those two variables, individually, have on decreasing lap times becomes more difficult. 
+Another nuance about Formula One when compared to most, particularly American, sports is that there is historically very-little parity between the top teams and the bottom teams. So while, in the plot below, we see lap times decreasing from session 1-3, this *could* be due to track evolution or it could also be that the average performance of the cars remaining in Q3 are almost always going to be better than the cars in session participating in Q1. This brings up a problem of *collinearity*, which is a term in statistics used to describe multiple independent variables being associated with each other. So what does that mean? If we have track evolution decreasing lap times, and we have the general, increasing strength of the field decreasing lap times, then being able to measure the effect that those two variables, individually, have on decreasing lap times becomes more difficult. 
 
 
 ```r
-
 ad_quali_2021_l %>%
   filter(hclust == 1) %>%
   ggplot(aes(x = coal_LapStartTime, y = LapTime5, color = hclust)) +
@@ -887,19 +889,17 @@ ad_quali_2021_l %>%
   scale_color_manual(values = c("1" = "#7a00f5",
                                 "2" = "#ab511d")) +
   theme_main() +
-  theme_main_add() 
-
+  theme_main_add()
 ```
 
 ![](images/ad_21_q_all_laps_all_drivers.png)
 
 <br/>
 
-For this analysis, we will deal with this case by analyzing the laps of only drivers that ended up making it to Q3. With this, the strength of the field is constant across all sessions and all laps being analyzed will be from drivers that drove in the each of the three sessions. One thing to note, however, is that in doing this we do make our already-small sample of relevant laps even smaller.
+For this analysis, we will deal with this case by analyzing the laps of only drivers that ended up making it to Q3. With this, the strength of the field is constant across all sessions as all remaining laps are drivers that participated throughout. One thing to note, however, is that in doing this we do make our already-small sample of relevant laps even smaller.
 
 ```r
-
-# grabbing the drivers who advanced to Q3 during qualifyinh
+# grabbing the drivers who advanced to Q3 during qualifying
 
 ad_compile_q3_drivers <- ad_quali_2021_l %>%
   select(raceName, Driver, session_number_coal) %>%
@@ -907,7 +907,6 @@ ad_compile_q3_drivers <- ad_quali_2021_l %>%
   summarize(max_session = max(as.numeric(as.character(session_number_coal))),
             .groups = "drop") %>%
   filter(max_session == 3)
-
 ```
 
 
@@ -922,10 +921,12 @@ ad_quali_2021_l_fast_compile <- ad_quali_2021_l %>%
 ```
 
 
-Below is a plot visualizing the relevant laps in this analysis: fast laps for drivers that made it through to Q3:
+<br/>
+
+Finally, data preparation is done and the data is ready for analyzing track evolution.
+In the plot below, there is a trend downwards in lap times for the drivers that participated in all three sessions. Generally speaking, it looks like lap times decreased between around 0.75 seconds to 1 second on average from the start of qualifying to the end. 
 
 ```r
-
 ad_quali_2021_l_fast_compile %>%
   ggplot(aes(x = coal_LapStartTime, y = LapTime5, color = hclust)) +
   geom_point(show.legend = FALSE) +
@@ -945,15 +946,10 @@ ad_quali_2021_l_fast_compile %>%
                                 "2" = "#ab511d")) +
   theme_main() +
   theme_main_add() 
-
 ```
 
 ![](images/ad_21_q_q3_drivers_all_laps.png)
 
-<br/>
-
-Finally, we are done preparing our data and can move on to analyzing track evolution.
-In the plot above, we can see a trend downwards in lap times for the drivers that participated in all three sessions. Generally speaking, it looks like lap times decreased between around 0.75 seconds to 1 second on average from the start of qualifying to the end. 
 
 <br/>
 
@@ -962,6 +958,8 @@ In the plot above, we can see a trend downwards in lap times for the drivers tha
 Now it's time to build a statistical model. For a descriptive analysis like this - where we're not necessarily interested in predicting outcomes, but rather in describing and measuring the patterns, trends, and behaviors that the data contains. There are a variety of models we can use to do accomplish this. Ideally we are looking for a model that's simple enough to interpret and explain, but possesses the ability to capture any non-linear or more-complicated trends that come up in our small data.
 
 Generalized Additive Models (GAM) are a great candidate to solve for these needs as they have more flexibility (no pun intended) in comparison to linear models - thanks to their usage of basis functions, but are also relatively-interpretable compared to fancier black box machine learning algorithms The **mgcv** package is a great tool for fitting GAMs, and below is code that instantiates a GAM model object. 
+
+The model created below: *ad_q3_driver_gam* is taking Lap Times as a function of session progress (lap_start_rownum, the running total of laps run by all drivers in a session), tire compound, and team. 
 
 
 ```r
@@ -991,7 +989,6 @@ ad_q3_driver_preds %>%
 ```
 
 ```
-
   DriverNumber Driver LapNumber lap_start_rownum Compound            Team session_number_coal LapTime5  .fitted    .se.fit     .resid    lower    upper
 1           33    VER         2               16     SOFT Red Bull Racing                   1   83.680 83.79090 0.09479842 -0.1108957 83.60509 83.97670
 2           33    VER         5               76     SOFT Red Bull Racing                   1   83.322 83.49598 0.07268155 -0.1739773 83.35352 83.63843
@@ -999,7 +996,6 @@ ad_q3_driver_preds %>%
 4           33    VER        12              248     SOFT Red Bull Racing                   2   82.800 82.96897 0.07414968 -0.1689707 82.82364 83.11430
 5           33    VER        15              277     SOFT Red Bull Racing                   3   82.109 82.91766 0.07113828 -0.8086554 82.77822 83.05709
 6           44    HAM         2               44     SOFT        Mercedes                   1   83.266 83.45849 0.08345470 -0.1924914 83.29492 83.62206
-
 ```
 
 Below is a visualization of the fit of the GAM model for Abu Dhabi qualifying. The laps and any usage of model outputs for laps under medium tires will all but be thrown away, but it's still kind of interesting to see the difference in lap time for teams that use both the soft and medium compound tires. 
@@ -1010,7 +1006,6 @@ Below is a visualization of the fit of the GAM model for Abu Dhabi qualifying. T
 ad_q3_driver_preds %>%
   ggplot(aes(x = lap_start_rownum, y = LapTime5, color = Compound)) +
   geom_point() +
-  # geom_smooth(method = "gam") +
   geom_ribbon(aes(ymin = lower, ymax = upper), alpha = 0.2) +
   geom_line(aes(x = lap_start_rownum, y = .fitted, group = Compound), color = "purple") +
   labs(title = "Lap Time Predictions per Session Progress, Team, Tire Compound",
@@ -1084,7 +1079,6 @@ ad_fit_predict_preds <- broom::augment(ad_q3_driver_gam, newdata = fit_predict_d
 The plot below shows that, as a whole, Mercedes was consistently faster throughout qualifying. However, Red Bull's Max Verstappen had the fastest lap of the session which came with help from a tow by his teammate Sergio Perez.
 
 ```r
-
 # plot: model over predicted data
 
 ad_fit_predict_preds %>%
@@ -1094,12 +1088,6 @@ ad_fit_predict_preds %>%
              aes(x = lap_start_rownum, y = LapTime5,
                  color = Driver)
              ) +
-  # geom_line(data = quali_gam_df %>%
-  #              unpack_safely(col = "preds_obs",
-  #                            data_to_keep = c("Driver", "TrackStatus")) %>%
-  #             filter(raceName == gp_select) %>%
-  #              filter(Compound == "SOFT"),
-  #            aes(x = lap_start_rownum, y = LapTime5, color = Driver), alpha = 0.5) +
   geom_line(color = "red") +
   geom_ribbon(aes(ymin = lower, ymax = upper), alpha = 0.2) +
   labs(title = "Lap Time Predictions over Session Progress",
@@ -1114,21 +1102,15 @@ ad_fit_predict_preds %>%
              nrow = 1) +
   theme_main() +
   theme_main_add()
-
 ```
 
 ![](images/ad_21_q_laptimes_preds.png)
 
-Now, it should be said that a GAM wasn't needed to be able to come to the conclusion above. What we can do is summarize the GAM model outputs for tracks as a whole and then compare track evolution that was seen across tracks in 2021.
-
-For starters, according to the Abu Dhabi GAM model, there was about a 1.2% decrease in lap times for drivers that made Q3 from the beginning to the end. Creating a model per track will let us compare respective decreases in lap times throughout (most of) the entire season.  
+According to the GAM, there was about a 1.2% decrease in lap times for drivers that made Q3 from the start to finish of Abu Dhabi's qualifying. Creating a model per track will let us compare respective decreases in lap times throughout (most of) the entire season.  
 
 ```r
 
 ad_quali_gam_pred_agg <- ad_fit_predict_preds %>%
-  # unpack_safely(col = "preds_new",
-  #               add_conf = TRUE,
-  #               data_to_keep = c("Driver", "TrackStatus")) %>% 
   group_by(raceName, lap_start_rownum) %>%
   summarize(raceName_mean_fitted = mean(.fitted)) %>%
   group_by(raceName) %>%
@@ -1311,41 +1293,6 @@ After pulling, cleaning, and building models for each qualifying session in the 
 
 As an example, Mexico City saw a steep decrease in lap times from the start of qualifying and saw the biggest percent change. On the contrary, Portugal saw the least. There are pretty good reasons for each of these, as mentioned on the broadcast for Mexico City's qualifying - it is a circuit that hardly gets used outside of the F1 race weekend. Combine the lack of usage with the dusty nature of Mexico City's air, and the circuit is constantly evolving and improving as cars are able to get laps in, which cleans the track surface and lays rubber down in the process. Portugal, on the other hand, is a very smooth track surface with very little grip. The racing there is challenging for drivers as they struggle to manage the many elevation changes in combination with the track surface being one of the slickest that F1 has raced on in recent years. 
 
-
-```r
-
-# final step: attempt to scale laps_start_rownum on a scale of 0-1 by raceName
-## note that this is for viz purposes only, and obviously wont be able to project that in realtime
-
-# scale laps to % session progress
-
-quali_gam_pred_agg %>%
-  ggplot(aes(x = pct_raceName_laps, y = mean_pct_decrease_evo,
-             color = raceName, group = raceName)) +
-  geom_line(show.legend = FALSE) +
-  geom_label_repel(aes(label = raceName, x = 1.025),
-                   data = quali_gam_pred_agg %>% 
-                            filter(pct_raceName_laps == 1) %>%
-                            select(raceName, mean_pct_decrease_evo, pct_raceName_laps),
-                   alpha = 0.8,
-                   size = 3,
-                   # nudge_x = 1.7,
-                   xlim = c(1,1.6),
-                   show.legend = FALSE) +
-  # geom_point() +
-  labs(title = "Average Decrease in Lap Times per Qualifying Session",
-       subtitle = "Portugal saw the least relative improvements in overall lap times, while Mexico City, Italy, and Monaco saw the most",
-         x = "Qualifying Progress",
-       y = "Average Decrease in Lap Times",
-       color = "Race") +
-  coord_cartesian(xlim = c(0,1.15)) +
-  scale_x_continuous(labels = scales::percent_format(accuracy = 1),
-                     breaks = seq(0,1,0.25)) +
-  scale_y_reverse(labels = scales::percent_format(accuracy = 0.01)) +
-  theme_main() + 
-  theme_main_add()
-
-```
 
 ![](images/all_final_conclusion_comp.png)
 
