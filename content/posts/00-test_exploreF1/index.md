@@ -241,7 +241,6 @@ What is LapTime5? This is a calculated column by me to use in cases where there 
 
 
 ```r
-
 selected_lap_vars <- c("Sector1Time", "Sector2Time")
 
 ad_quali_2021_l %>%
@@ -249,10 +248,25 @@ ad_quali_2021_l %>%
          Sector1SessionTime, Sector2SessionTime, Sector3SessionTime,
          Sector1Time, Sector2Time, Sector3Time, LapTime,
          LapTime5) %>%
-    filter(if_any(selected_lap_vars, is.na)) %>% View() 
-
+    filter(if_any(selected_lap_vars, is.na)) %>% 
+  as.data.frame() %>%
+  tail(10)
+```
 
 ```
+    Driver DriverNumber LapNumber PitInTime PitOutTime Sector1SessionTime Sector2SessionTime Sector3SessionTime Sector1Time Sector2Time Sector3Time LapTime LapTime5
+99     RAI            7         1       NaN    941.005                NaN           1008.874           1058.579         NaN      44.707      49.475     NaN  117.344
+100    RAI            7         5  1709.626   1587.710                NaN                NaN                NaN         NaN         NaN         NaN     NaN  350.293
+101    RAI            7         6       NaN   1782.394                NaN           1848.256           1888.635         NaN      45.355      40.136     NaN  105.998
+102    MSC           47         1       NaN    908.732                NaN            979.715           1023.636         NaN      47.376      43.698     NaN  114.681
+103    MSC           47         4       NaN   1341.744                NaN           1410.758           1465.733         NaN      44.561      54.742     NaN  123.756
+104    MSC           47         6  1660.142        NaN           1569.781                NaN                NaN      18.975         NaN         NaN     NaN  109.406
+105    MSC           47         7       NaN   1907.108                NaN           1977.142           2029.482         NaN      46.363      52.399     NaN  122.347
+106    MAZ            9         1       NaN    923.264                NaN           1003.977           1053.087         NaN      46.350      48.904     NaN  129.617
+107    MAZ            9         4       NaN   1320.601                NaN           1396.984           1441.344         NaN      51.407      44.141     NaN  120.524
+108    MAZ            9         7       NaN   1911.908                NaN           1981.190           2037.596         NaN      43.316      56.336     NaN  125.457
+```
+
 
 For our first problematic lap example below, it is one of the more common cases in which a driver enters or exits the pit lane during the lap. By F1 standards, this makes sense as to why there isn't an official lap time as the entrance of pit lane is prior to the start/finish line and the exit of pit lane is after the start/finish line. So this leads to a bit of a gap in the data for these In Laps and Out Laps.
 
