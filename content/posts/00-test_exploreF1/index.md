@@ -1202,9 +1202,9 @@ ad_compile_test_mult <- circuits_2021$raceName %>%
 
 ```
 
-The bread and butter of this portion of the analysis comes from a concept used in R called nesting. Nesting lets us essentially iterate whatever it is that we want to do by specific groups. In this case - we've got a lap for every driver in every qualifying session, but what is needed is an effective separation of the things that we do to be between qualifying sessions in 2021 rather than, say, entire seasons. 
+The bread and butter of this portion of the analysis comes from a concept used in R called nesting. Nesting, in this case, allows us to iterate a function within individual qualifying sessions rather than over an entire season's worth of data. 
 
-Below is a nested dataframe. Instead of having a row for every lap, we have a row for every qualifying session in 2021. Within these rows are objects built within the datafame, which is where the term nesting comes from. 
+Below is a nested dataframe. Instead of having a row for every lap, we have a row for every qualifying session in 2021. Within these rows are objects - lap-level dataframes, model parameters, objects, and outputs, all nested within the 19 row dataframe. 
   
 
 ```r
@@ -1244,7 +1244,7 @@ The objects that are created for each qualifying session are:
     - This is just a plain, old integer representing the maximum number of tires used in a qualifying session for any team. In most qualifying sessions throughout the season, the top teams would elect to at least attempt a stint in Q2 on the medium compound. This integer is used as a condition for determining which of the following models to use, per qualifying. If there were more than compound of tires used in a qualifying session - then add compound as a variable in the model, if not - leave compound out of the model. Once again, leaving compound in the model was mostly to satisfy my curiosity, rather than having any serious reason due to the very low sample of laps that used medium compound tires in comparison to the softs. 
     
   - *gam_lambda*
-    - This is another integer, referred to as *lambda* ( $\lambda$ ), which is used as a penalty parameter. When the models are created, we want to capture non-linear trends without our fitted model being a straight line or too "wiggly". The $\lambda$ value allows us to adjust the "wigglyness" of each model. For the majority of the 19 qualifying sessions that we built GAM models for, we let the model default to its own $\lambda$ value. However, for Bahrain, Hungary, and Monaco our models were not generalizing to the data well (known as over-fitting) and needed this parameter set manually. In each case, setting $\lambda = 4$ allowed us to remove excessive wigglyness. 
+    - This is another integer, referred to as *lambda* ( λ ), which is used as a penalty parameter. When the models are created, we want to capture non-linear trends without our fitted model being a straight line or too "wiggly". The λ value allows us to adjust the "wigglyness" of each model. For the majority of the 19 qualifying sessions that we built GAM models for, we let the model default to its own λ value. However, for Bahrain, Hungary, and Monaco our models were not generalizing to the data well (known as over-fitting) and needed this parameter set manually. In each case, setting λ = 4 allowed us to remove excessive wigglyness. 
   
   - *data*
     - The "original" dataframe featuring the fast laps for all drivers per qualifying session.
@@ -1314,3 +1314,8 @@ As an example, Mexico City saw a steep decrease in lap times from the start of q
 ![](images/all_final_conclusion_comp.png)
 
 <br/>
+
+With a descriptive analysis such as this one - the exact rankings of how much track evolution each circuit experienced during qualifying can and definitely should be up for debate. However, I feel comfortable enough in using this as a directional tool for how a lot of circuits behaved last year. Perhaps a bit too pronounced in the model, but I especially enjoy the Saudi Arabia track evolution, as it is evident how drivers were still adapting to a new track in the beginning of the evening session, then the setting sun rapidly cooled the track and therefore decreased lap times towards the end of qualifying. To close, one fallback of this particular analysis is really the lack of Apples-to-Apples lap data to create robust models for - as in throwing out all practice and race lap data in favor of qualifying. F1 teams have far more internal data at their disposal to inform their decisions for simple things like track evolution, but I hope that this at least gives some insight in walking through an analysis from data acquisition, to cleaning, and plotting. Until next time, cheers!
+
+<br/>
+
