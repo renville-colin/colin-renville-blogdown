@@ -588,16 +588,17 @@ ad_VER_focus_laps <- ad_quali_2021_l %>%
 
 
 ad_VER_focus_laps %>%
+  select(Driver, DriverNumber, LapNumber, PitInTime, PitOutTime, LapTime5) %>%
   as.data.frame()
 ```
 
 ```
 
-  Driver DriverNumber LapNumber PitInTime PitOutTime Sector1SessionTime Sector2SessionTime Sector3SessionTime Sector1Time Sector2Time Sector3Time LapTime LapTime5 ver_focus_flag
-1    VER           33         7       NaN   2596.296                NaN           2659.883           2699.623         NaN      41.847      39.790     NaN  103.320              1
-2    VER           33         8       NaN        NaN           2716.580           2752.499           2782.805      16.964      35.919      30.306  83.189   83.189              1
-3    VER           33         9       NaN        NaN           2811.413           2879.422           2934.311      28.572      68.014      54.892     NaN  151.478              1
-4    VER           33        10  3036.302        NaN           2955.165           2994.733           3037.467      20.854      39.568      42.734 103.156  103.156              1
+  Driver DriverNumber LapNumber PitInTime PitOutTime LapTime5
+1    VER           33         7       NaN   2596.296  103.320
+2    VER           33         8       NaN        NaN   83.189
+3    VER           33         9       NaN        NaN  151.478
+4    VER           33        10  3036.302        NaN  103.156
 
 ```
 
@@ -770,16 +771,18 @@ ad_VER_focus_laps <- ad_quali_2021_l %>%
 
 
 ad_VER_focus_laps %>%
+  select(Driver, DriverNumber, LapNumber, 
+         PitInTime, PitOutTime, LapTime5, hclust) %>%
   as.data.frame() 
 ```
 
 ```
 
-  Driver DriverNumber LapNumber PitInTime PitOutTime Sector1SessionTime Sector2SessionTime Sector3SessionTime Sector1Time Sector2Time Sector3Time LapTime LapTime5 hclust ver_focus_flag
-1    VER           33         7       NaN   2596.296                NaN           2659.883           2699.623         NaN      41.847      39.790     NaN  103.320   <NA>              1
-2    VER           33         8       NaN        NaN           2716.580           2752.499           2782.805      16.964      35.919      30.306  83.189   83.189      1              1
-3    VER           33         9       NaN        NaN           2811.413           2879.422           2934.311      28.572      68.014      54.892     NaN  151.478      2              1
-4    VER           33        10  3036.302        NaN           2955.165           2994.733           3037.467      20.854      39.568      42.734 103.156  103.156   <NA>              1
+  Driver DriverNumber LapNumber PitInTime PitOutTime LapTime5 hclust
+1    VER           33         7       NaN   2596.296  103.320   <NA>
+2    VER           33         8       NaN        NaN   83.189      1
+3    VER           33         9       NaN        NaN  151.478      2
+4    VER           33        10  3036.302        NaN  103.156   <NA>
 
 ```
 
